@@ -22,7 +22,12 @@ def insert_data(ticker_symbol, stock_name, dividend_percent, current_price):
     cursor.execute('''
     INSERT INTO stocks (ticker_symbol, stock_name, dividend_percent, current_price, acquired_shares)
     VALUES (?, ?, ?, ?, ?)
-    ''', (ticker_symbol, stock_name, dividend_percent, current_price, 1))
+    ''', (ticker_symbol, stock_name, dividend_percent, current_price, 0))
+    conn.commit()
+
+# 取得予定数の株数に変更
+def update_data(ID, expected_shares):
+    cursor.execute('UPDATE stocks SET acquired_shares = ? WHERE id = ?', (expected_shares, ID))
     conn.commit()
 
 # データを取得する関数
