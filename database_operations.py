@@ -25,6 +25,11 @@ def insert_data(ticker_symbol, stock_name, dividend_percent, current_price):
     ''', (ticker_symbol, stock_name, dividend_percent, current_price, 0))
     conn.commit()
 
+# 最新のデータにアップデート
+def current_update(ticker_symbol, dividend_percent, current_price):
+    cursor.execute('UPDATE stocks SET dividend_percent = ?, current_price = ? WHERE ticker_symbol = ?', (dividend_percent, current_price, ticker_symbol))
+    conn.commit()
+
 # 取得予定数の株数に変更
 def update_data(ID, expected_shares):
     cursor.execute('UPDATE stocks SET acquired_shares = ? WHERE id = ?', (expected_shares, ID))
